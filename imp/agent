@@ -1,0 +1,10 @@
+#require "Firebase.class.nut:1.0.0"
+
+firebase <- Firebase("watchout");
+
+function noiseLoud(state) {
+    server.log("LOUD NOISE:" + state);
+    firebase.push("", state)
+}
+
+device.on("loud", noiseLoud);
