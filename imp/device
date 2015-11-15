@@ -1,0 +1,28 @@
+led <- hardware.pin9;
+led.configure(DIGITAL_OUT, 0);
+
+sensor <- hardware.pin5;
+sensor.configure(ANALOG_IN);
+
+function noiseDetected()
+{
+    
+    local sensorState = 0;
+
+    // Set LED pin to new value
+    if (sensor.read() > 13000){
+        led.write(1);
+        sensorState = 1;
+        agent.send("loud", sensorState);
+        imp.sleep(5);
+    }
+    else {
+        led.write(0);
+        sensorState = 0;
+    }
+    
+    // Schedule a wakeup in 100ms, with a callback to this function.
+    imp.wakeup(0.1, noiseDetected);
+}
+
+noiseDetected(); // Call sendPins once, and let it do the rest of the work.
