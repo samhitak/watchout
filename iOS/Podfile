@@ -1,0 +1,4 @@
+platform :ios, '9.1'
+pod 'PebbleKit'
+
+pod 'Firebase', '>= 2.4.2'

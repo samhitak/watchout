@@ -1,0 +1,13 @@
+PODS:
+  - Firebase (2.4.2)
+  - PebbleKit (3.0.0)
+
+DEPENDENCIES:
+  - Firebase (>= 2.4.2)
+  - PebbleKit
+
+SPEC CHECKSUMS:
+  Firebase: 5e898ed5012c81d28ca5fae1113c6b61a172bc6d
+  PebbleKit: 575087dc3e7ca1687929dd4903baabcf8f224cff
+
+COCOAPODS: 0.39.0
