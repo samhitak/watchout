@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>WatchOut</title>
+
+    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <script src="http://code.jquery.com/mobile/1.3.1/jquery.mobile-1.3.1.min.js"></script>
+    <script>
+        $( function() {   
+            // Edit these values first! The externalURL variable should be the
+            // unique URL of your agent. e.g. the last part of:
+            // https://agent.electricimp.com/UpyYpRLmBB7m
+            // pollRate defines how often the values on your page will refresh.
+            var externalURL ="A7QuRxq4COWF";
+            var pollRate ="1000";
+
+            function poll(){
+                // Construct an ajax() GET request.
+                // http://www.w3schools.com/jquery/ajax_ajax.asp
+
+                $.ajax({
+                    type: "get",
+                    url: "https://agent.electricimp.com/"+externalURL,  // URL of our imp agent.
+                    dataType: "json",   // Expect JSON-formatted response from agent.
+                    success: function(agentMsg) {   // Function to run when request succeeds.
+
+                        // jQuery find "pin1" id and overwrite its data with "pin1" key value in agentMsg
+                        $("#pin1").html(agentMsg.pin1);             
+                        $("#pin2").html(agentMsg.pin2);
+                        $("#pin5").html(agentMsg.pin5);
+                        $("#pin7").html(agentMsg.pin7);
+                        $("#pin8").html(agentMsg.pin8);
+                        $("#pin9").html(agentMsg.pin9);
+                        $("#vin").html(agentMsg.voltage);
+
+
+
+                        updateBG(agentMsg.pin5);    // Try this if you have a photocell connected to pin 5
+                    },
+                    error: function(err) {
+                        console.log("err"+ err.status)
+                    }
+                });
+            }
+
+            // setInterval is Javascript method to call a function at a specified interval.
+            // http://www.w3schools.com/jsref/met_win_setinterval.asp
+            setInterval(function(){ poll(); }, pollRate);
+
+            // This function updates the 
+            function updateBG(lightSensor)
+            {
+                if (lightSensor > 30000)
+                {
+                    document.body.style.backgroundColor = "#FFFFFF";
+                }
+                else
+                {
+                    document.body.style.backgroundColor = "#AAAAAA";
+                }
+            }
+        });
+    </script>
+
+    <!-- Bootstrap Core CSS - Uses Bootswatch Flatly Theme: http://bootswatch.com/flatly/ -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="css/freelancer.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="font-awesome-4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body id="page-top" class="index">
+
+
+    <!-- Header VERY IMPORTNT-->
+    <header>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    
+                    <div class="intro-text">
+                        <hr class="star-light">
+                        <span class="name">WatchOut</span>
+                        <hr class="star-light">
+                        <!--<span class="skills">President - Princetonian - Visionary</span>-->
+                    </div>
+                    <img class="img-responsive" src="img/caution.png" alt="">
+       
+               <h1>A Pebble watch app to help keep you safe</h1>
+                     <h3></h3>
+                     <h3>WatchOut is a watchapp for Pebble smartwatch that helps you alert others when you're in danger. Using the accelerometer in the smartwatch and external microphone, WatchOut
+        sends out an alert to when you raise your arms to a defensive position and/or call for help. Whether for a victim of domestic abuse or a college student walking back alone to her dorm after
+        a party, we WatchOut for your safety.</h3>
+                     <h3></h3>
+                     <h1></h1>
+                </div>
+            </div>
+        </div>
+    </header>
+
+
+    <!-- jQuery -->
+    <script src="js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
+
+    <!-- Plugin JavaScript -->
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
+    <script src="js/classie.js"></script>
+    <script src="js/cbpAnimatedHeader.js"></script>
+
+
+    <!-- Custom Theme JavaScript -->
+    <script src="js/freelancer.js"></script>
+
+</body>
+
+</html>
